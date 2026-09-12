@@ -34,21 +34,24 @@ public class Ejercicio22 {
             //Mayor y menor con el primer elemento
             int Mayor = matriz[0][0];
             int Menor = matriz[0][0];
-            int filaMayor = 0, columnaMayor =0; //posicion del mayor
-            int filaMenor =0, columnaMenor =0; //posicion del Menor
+           
+            int filaMayor = 0, columnaMayor =0;  //posicion del mayor
+            int filaMenor =0, columnaMenor =0;  //posicion del Menor
 
             //Se recorre la matriz para encontrar mayor  y menor
-            for(int i = 0; i < filas;  i++) { //Recorre filas
-                for(int j = 0; j < columnas; j++){ //Recorre columnas
-                    if(matriz[i][j] > Mayor ){ // si el elemento actual es mayor que el registrado
-                        Mayor = matriz[i][j]; //Actualiza el mayor
-                        filaMayor = i; //Guarda la fila del mayor 
-                        columnaMayor = j; //Guarda columna del mayor
+            for(int i = 0; i < filas;  i++) {    //Recorre filas
+                for(int j = 0; j < columnas; j++){     //Recorre columnas
+                    if(matriz[i][j] > Mayor ){   // si el elemento actual es mayor que el registrado
+                      
+                        Mayor = matriz[i][j];    //Actualiza el mayor
+                        filaMayor = i;  //Guarda la fila del mayor 
+                        columnaMayor = j;  //Guarda columna del mayor
                     }
                     if(matriz[i][j] < Menor) { // si el elemento actual es menor que el registrado
-                        Menor = matriz [i][j]; //Actualiza el menor
-                        filaMenor = i; //Guarda la fila del menor
-                        columnaMenor = j; //Guarda columna del menor
+                      
+                        Menor = matriz [i][j];   //Actualiza el menor
+                        filaMenor = i;    //Guarda la fila del menor
+                        columnaMenor = j;    //Guarda columna del menor
                     }
                 }
             }
