@@ -1,9 +1,5 @@
 public class Funcion {
 
-public static void main(String[] args) {
-    
-}
-
     // Atributos
     private String horario;
     private Pelicula pelicula;
