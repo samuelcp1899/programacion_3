@@ -3,6 +3,7 @@ public class Sala {
     public static void main(String[] args) {
         
     }
+
     // Atributos
     private int numero; // guardar el numero de salas ( puede ser sala 1 2 o 3)
 
@@ -278,5 +279,79 @@ public class Sala {
 
         return true;
     }
+
+    // Metodo para contar las sillas generales disponibles
+    public int contarSillasGeneralesDisponibles() {
+
+        // Variable para almacenar la cantidad de sillas disponibles
+        int cantidadDisponibles = 0;
+
+        // Recorre las 6 filas de la matriz de sillas disponibles
+        for (int i = 0; i < sillasGenerales.length; i++) {
+
+            // Recorre las 12 sillas de cada fila
+            for (int j = 0; j < sillasGenerales[i].length; j++) {
+
+                // comprueba si la silla esta disponible
+                // false = silla no ocupada
+                if (sillasGenerales[i][j] == false) {
+
+                    // Aumenta en 1 la cantidad de sillas disponibles
+                    cantidadDisponibles++;
+                }
+            }
+        }
+
+        // Devuelve la cantidad total de sillas generales disponibles
+        return cantidadDisponibles;
+    }
+
+    // Metodo para contar las sillas preferenciales disponibles
+    public int contarSillasPreferencialesDisponibles() {
+
+        // Comprueba si la sala tiene sillas preferenciales
+        if (sillasPreferenciales == null) {
+
+            // Retorna 0 por que la sala 3 no tiene seccion preferencial
+            return 0;
+        }
+
+        // Variable que almacena la cantidad de sillas disponibles
+        int cantidadDisponibles = 0;
+
+        // Recorre las 2 filas de la matriz de sillas preferenciales
+        for (int i = 0; i < sillasPreferenciales.length; i++) {
+
+            // Recorre las 9 sillas de cada fila preferencial
+            for (int j = 0; j < sillasPreferenciales[i].length; j++) {
+
+                // comprueba si la silla preferencial esta disponible
+                if (sillasPreferenciales[i][j] == false) {
+
+                    // Aumenta en 1 la cantidad de sillas disponibles
+                    cantidadDisponibles++;
+                }
+            }
+        }
+        // Devuelve la cantidad total de sillas preferenciales disponibles
+        return cantidadDisponibles;
+    }
+
+    // Metodo para mostrar la cantidad de sillas disponibles
+    public void mostrarCantidadSillasDisponibles() {
+        
+        // Muestra la cantidad de sillas generales que siguen disponibles
+        System.out.println("Sillas generales disponibles: " + contarSillasGeneralesDisponibles());
+
+        //Compruieba si la sala tiene seccion preferencial
+        if(sillasPreferenciales != null) {
+
+            //Muestra la cantidad de sillas preferenciales disponibles
+            System.out.println("Sillas preferenciales disponibles: " + contarSillasPreferencialesDisponibles());
+        }
+
+    }
+
+
 
 }
