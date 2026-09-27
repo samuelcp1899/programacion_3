@@ -219,15 +219,64 @@ public class Sala {
         System.out.println("La silla " + letraFila + numeroSilla + "Fue comprada con exito: ");
 
         return true;
-     }
+    }
 
-     //Metodo para comprar una silla preferencial
-     //public boolean comprarSillaPreferencial(int fila, int numeroSilla){
+    // Metodo para comprar una silla preferencial
+    public boolean comprarSillaPreferencial(int fila, int numeroSilla) {
 
-        //Comprueba si la sala tiene sillas preferenciales
-       // if(sillasPreferenciales == null){
-            
-       // }
-     //}
+        // Comprueba si la sala tiene sillas preferenciales
+        if (sillasPreferenciales == null) {
+
+            // Muestra un mensaje si se intenta comprar una silla preferencial en la sala 3
+            System.out.println("Esta sala no tiene sillas preferenciales");
+
+            return false;
+
+        }
+
+        // Se resta 1 por que las posicones de las matrices comienzan desde 0
+        int posicionFila = fila - 1;
+        int posicionSilla = numeroSilla - 1;
+
+        // comprueba que la fila se encuentre entre 1 y 2
+        if (fila < 1 || fila > 2) {
+
+            // Mensaje por si la fila no existe
+            System.out.println("La fila preferencial ingresada no existe: ");
+
+            return false;
+        }
+
+        // Comprueba que el numero de la silla se encuentre entre 1 y 9
+        if (numeroSilla < 1 || numeroSilla > 9) {
+
+            // Mensaje si la silla no existe
+            System.out.println("La silla preferencial ingresada no existe: ");
+
+            return false;
+        }
+
+        // Comprueba si la silla seleccionada esta ocupada
+        if (sillasPreferenciales[posicionFila][posicionSilla]) {
+
+            // Muestra un mensaje si la silla ya fue comprada
+            System.out.println("La silla preferencial ya esta ocupada: ");
+
+            return false;
+        }
+
+        // Cambia el estado de la silla de disponible a ocupada
+        // false a true
+        sillasPreferenciales[posicionFila][posicionSilla] = true;
+
+        // Convierte la poscion de la fila en una letra
+        // Fila 1 se convierte en G y la fila 2 en H
+        char letraFila = (char) ('G' + posicionFila);
+
+        // Mensaje de que la compra fue realizda correctamente
+        System.out.println("La silla " + letraFila + numeroSilla + "fue comprada con exito: ");
+
+        return true;
+    }
 
 }
