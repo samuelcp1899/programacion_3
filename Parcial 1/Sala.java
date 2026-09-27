@@ -1,9 +1,5 @@
 public class Sala {
 
-public static void main(String[] args) {
-    
-}
-
     // Atributos
     private int numero; // guardar el numero de salas ( puede ser sala 1 2 o 3)
 
