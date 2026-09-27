@@ -1,23 +1,23 @@
 public class Sala {
 
-    public static void main(String[] args) {
-        
-    }
+public static void main(String[] args) {
+    
+}
 
     // Atributos
     private int numero; // guardar el numero de salas ( puede ser sala 1 2 o 3)
 
-    // Creacion de la matriz para guardar las sillas generales
+    // Creacion de la matriz para guardar las sillas generales de cada funcion
     // use boolean por que en este caso la silla solo puede tener 2 estados
     // Disponible y ocupado por lo que se puede representar como verdadero y falso
-    private boolean[][] sillasGenerales;
+    private boolean[][][] sillasGenerales;
 
     // Determina una silla (False: silla disponible)
     // --------------------(True: Silla ocupada)
 
-    // Matriz para guardar el estado de las sillas preferenciales
+    // Matriz para guardar el estado de las sillas preferenciales de cada funcion
     // sala 1 y 2
-    private boolean[][] sillasPreferenciales;
+    private boolean[][][] sillasPreferenciales;
 
     // Arreglo que guarda las 3 funciones disponibles
     private Funcion[] funciones;
@@ -26,15 +26,15 @@ public class Sala {
     public Sala(int numero) {
         this.numero = numero; // Guarda el numero recibido del atributo numero
 
-        // Matriz de sillas generales (6 filas y 12 columnas)
-        this.sillasGenerales = new boolean[6][12];
+        // Matriz de sillas generales (3 funciones, 6 filas y 12 columnas)
+        this.sillasGenerales = new boolean[3][6][12];
 
         // comprueba si la sala creada es la sala 1 o la sala 2
         if (numero == 1 || numero == 2) {
 
             // en caso de que sea la sala 1 o 2, es la seccion preferencial
-            // con 2 filas y 9 columnas
-            this.sillasPreferenciales = new boolean[2][9];
+            // con 3 funciones, 2 filas y 9 columnas
+            this.sillasPreferenciales = new boolean[3][2][9];
         } else {
 
             // como la sala 3 no tiene sillasPreferenciales se deja null
@@ -58,12 +58,12 @@ public class Sala {
         return numero;
     }
 
-    // Para consultar la matriz de sillas generales
-    public boolean[][] getSillasGenerales() {
+    // Para consultar la matriz de sillas generales de las 3 funciones
+    public boolean[][][] getSillasGenerales() {
         return sillasGenerales;
     }
 
-    public boolean[][] getSillasPreferenciales() {
+    public boolean[][][] getSillasPreferenciales() {
         return sillasPreferenciales;
     }
 
@@ -94,11 +94,20 @@ public class Sala {
 
     }
 
-    // Metodo para mostrar las sillas generales de la sala
-    public void mostrarSillasGenerales() {
+    // Metodo para mostrar las sillas generales de una funcion
+    public void mostrarSillasGenerales(int numeroFuncion) {
 
-        // Recorre las 6 filas de la matriz de sillas generales
-        for (int i = 0; i < sillasGenerales.length; i++) {
+        // Comprueba que la funcion se encuentre entre 1 y 3
+        if (numeroFuncion < 1 || numeroFuncion > 3) {
+            System.out.println("La funcion ingresada no existe: ");
+            return;
+        }
+
+        // Se resta 1 porque las posiciones de los arreglos comienzan desde 0
+        int posicionFuncion = numeroFuncion - 1;
+
+        // Recorre las 6 filas de la matriz de sillas generales de la funcion
+        for (int i = 0; i < sillasGenerales[posicionFuncion].length; i++) {
 
             // Convierte el numero de la fila en una letra
             // Cuando i vale 0, la letra sera A
@@ -109,10 +118,10 @@ public class Sala {
             System.out.println(letraFila + " ");
 
             // Recorre las 12 sillas que tiene cada fila
-            for (int j = 0; j < sillasGenerales[i].length; j++) {
+            for (int j = 0; j < sillasGenerales[posicionFuncion][i].length; j++) {
 
-                // Comprueba si la silla esta ocupada
-                if (sillasGenerales[i][j]) {
+                // Comprueba si la silla esta ocupada en la funcion seleccionada
+                if (sillasGenerales[posicionFuncion][i][j]) {
 
                     // La X representa la silla ocupada
                     System.out.print("[X]");
@@ -128,8 +137,8 @@ public class Sala {
         }
     }
 
-    // Metodo para mostrar las sillas preferenciales
-    public void mostrarSillasPreferenciales() {
+    // Metodo para mostrar las sillas preferenciales de una funcion
+    public void mostrarSillasPreferenciales(int numeroFuncion) {
         // Comprueba si la sala tiene seccion preferencial
         if (sillasPreferenciales == null) {
 
@@ -140,8 +149,17 @@ public class Sala {
             return;
         }
 
-        // Recorre las 2 filas de la seccion preferencial
-        for (int i = 0; i < sillasPreferenciales.length; i++) {
+        // Comprueba que la funcion se encuentre entre 1 y 3
+        if (numeroFuncion < 1 || numeroFuncion > 3) {
+            System.out.println("La funcion ingresada no existe: ");
+            return;
+        }
+
+        // Se resta 1 porque las posiciones de los arreglos comienzan desde 0
+        int posicionFuncion = numeroFuncion - 1;
+
+        // Recorre las 2 filas de la seccion preferencial de la funcion
+        for (int i = 0; i < sillasPreferenciales[posicionFuncion].length; i++) {
 
             // Convierte el numero de la fila en una letra
             // cuando i vale 0, la letra sera G
@@ -154,10 +172,10 @@ public class Sala {
             System.out.print(letraFila + "");
 
             // Recorre las 9 sillas que tiene cada fila preferencial
-            for (int j = 0; j < sillasPreferenciales[i].length; j++) {
+            for (int j = 0; j < sillasPreferenciales[posicionFuncion][i].length; j++) {
 
-                // Comprueba si la silla preferencial esta ocupada
-                if (sillasPreferenciales[i][j]) {
+                // Comprueba si la silla preferencial esta ocupada en la funcion
+                if (sillasPreferenciales[posicionFuncion][i][j]) {
 
                     // La X marca una silla ocupada
                     System.out.print("[X]");
@@ -173,11 +191,22 @@ public class Sala {
         }
     }
 
-    // Metodo para comprar una silla general
-    public boolean comprarSillaGeneral(int fila, int numeroSilla) {
+    // Metodo para comprar una silla general en una funcion
+    public boolean comprarSillaGeneral(int numeroFuncion, int fila, int numeroSilla) {
+
+        // Comprueba que la funcion se encuentre entre 1 y 3
+        if (numeroFuncion < 1 || numeroFuncion > 3) {
+
+            // Muestra un mensaje si la funcion no existe
+            System.out.println("La funcion ingresada no existe: ");
+
+            return false;
+        }
 
         // Se resta 1 por que las posicones de las matrices comienzan desde 0
-        // La fila 1 sera la posicion 0 y la silla 1 sera la posicion 0
+        // La funcion 1 sera la posicion 0, la fila 1 sera la posicion 0
+        // y la silla 1 sera la posicion 0
+        int posicionFuncion = numeroFuncion - 1;
         int posicionFila = fila - 1;
         int posicionSilla = numeroSilla - 1;
 
@@ -201,17 +230,18 @@ public class Sala {
             return false;
         }
 
-        // Comprueba si la silla seleccionada ya esta ocupada
-        if (sillasGenerales[posicionFila][posicionSilla]) {
+        // Comprueba si la silla seleccionada ya esta ocupada en esa funcion
+        if (sillasGenerales[posicionFuncion][posicionFila][posicionSilla]) {
 
-            // Muestra un mensaje si la silla ya fue comprada
+            // Muestra un mensaje si la silla ya fue comprada en esa funcion
             System.out.println("La silla ya esta ocupada: ");
 
             return false;
         }
 
-        // Cambia el estado de la silla de disponible a ocupada (false a true)
-        sillasGenerales[posicionFila][posicionSilla] = true;
+        // Cambia el estado de la silla de disponible a ocupada en esa funcion
+        // false a true
+        sillasGenerales[posicionFuncion][posicionFila][posicionSilla] = true;
 
         // Convierte la posicion de la fila en una letra para mostrarla
         char letraFila = (char) ('A' + posicionFila);
@@ -222,8 +252,8 @@ public class Sala {
         return true;
     }
 
-    // Metodo para comprar una silla preferencial
-    public boolean comprarSillaPreferencial(int fila, int numeroSilla) {
+    // Metodo para comprar una silla preferencial en una funcion
+    public boolean comprarSillaPreferencial(int numeroFuncion, int fila, int numeroSilla) {
 
         // Comprueba si la sala tiene sillas preferenciales
         if (sillasPreferenciales == null) {
@@ -235,7 +265,19 @@ public class Sala {
 
         }
 
+        // Comprueba que la funcion se encuentre entre 1 y 3
+        if (numeroFuncion < 1 || numeroFuncion > 3) {
+
+            // Muestra un mensaje si la funcion no existe
+            System.out.println("La funcion ingresada no existe: ");
+
+            return false;
+        }
+
         // Se resta 1 por que las posicones de las matrices comienzan desde 0
+        // La funcion 1 sera la posicion 0, la fila 1 sera la posicion 0
+        // y la silla 1 sera la posicion 0
+        int posicionFuncion = numeroFuncion - 1;
         int posicionFila = fila - 1;
         int posicionSilla = numeroSilla - 1;
 
@@ -257,18 +299,18 @@ public class Sala {
             return false;
         }
 
-        // Comprueba si la silla seleccionada esta ocupada
-        if (sillasPreferenciales[posicionFila][posicionSilla]) {
+        // Comprueba si la silla seleccionada esta ocupada en esa funcion
+        if (sillasPreferenciales[posicionFuncion][posicionFila][posicionSilla]) {
 
-            // Muestra un mensaje si la silla ya fue comprada
+            // Muestra un mensaje si la silla ya fue comprada en esa funcion
             System.out.println("La silla preferencial ya esta ocupada: ");
 
             return false;
         }
 
-        // Cambia el estado de la silla de disponible a ocupada
+        // Cambia el estado de la silla de disponible a ocupada en esa funcion
         // false a true
-        sillasPreferenciales[posicionFila][posicionSilla] = true;
+        sillasPreferenciales[posicionFuncion][posicionFila][posicionSilla] = true;
 
         // Convierte la poscion de la fila en una letra
         // Fila 1 se convierte en G y la fila 2 en H
@@ -280,21 +322,29 @@ public class Sala {
         return true;
     }
 
-    // Metodo para contar las sillas generales disponibles
-    public int contarSillasGeneralesDisponibles() {
+    // Metodo para contar las sillas generales disponibles de una funcion
+    public int contarSillasGeneralesDisponibles(int numeroFuncion) {
+
+        // Comprueba que la funcion se encuentre entre 1 y 3
+        if (numeroFuncion < 1 || numeroFuncion > 3) {
+            return 0;
+        }
+
+        // Se resta 1 porque las posiciones de los arreglos comienzan desde 0
+        int posicionFuncion = numeroFuncion - 1;
 
         // Variable para almacenar la cantidad de sillas disponibles
         int cantidadDisponibles = 0;
 
-        // Recorre las 6 filas de la matriz de sillas disponibles
-        for (int i = 0; i < sillasGenerales.length; i++) {
+        // Recorre las 6 filas de la matriz de sillas disponibles de la funcion
+        for (int i = 0; i < sillasGenerales[posicionFuncion].length; i++) {
 
             // Recorre las 12 sillas de cada fila
-            for (int j = 0; j < sillasGenerales[i].length; j++) {
+            for (int j = 0; j < sillasGenerales[posicionFuncion][i].length; j++) {
 
-                // comprueba si la silla esta disponible
+                // comprueba si la silla esta disponible en la funcion
                 // false = silla no ocupada
-                if (sillasGenerales[i][j] == false) {
+                if (sillasGenerales[posicionFuncion][i][j] == false) {
 
                     // Aumenta en 1 la cantidad de sillas disponibles
                     cantidadDisponibles++;
@@ -306,8 +356,8 @@ public class Sala {
         return cantidadDisponibles;
     }
 
-    // Metodo para contar las sillas preferenciales disponibles
-    public int contarSillasPreferencialesDisponibles() {
+    // Metodo para contar las sillas preferenciales disponibles de una funcion
+    public int contarSillasPreferencialesDisponibles(int numeroFuncion) {
 
         // Comprueba si la sala tiene sillas preferenciales
         if (sillasPreferenciales == null) {
@@ -316,42 +366,117 @@ public class Sala {
             return 0;
         }
 
+        // Comprueba que la funcion se encuentre entre 1 y 3
+        if (numeroFuncion < 1 || numeroFuncion > 3) {
+            return 0;
+        }
+
+        // Se resta 1 porque las posiciones de los arreglos comienzan desde 0
+        int posicionFuncion = numeroFuncion - 1;
+
         // Variable que almacena la cantidad de sillas disponibles
         int cantidadDisponibles = 0;
 
-        // Recorre las 2 filas de la matriz de sillas preferenciales
-        for (int i = 0; i < sillasPreferenciales.length; i++) {
+        // Recorre las 2 filas de la matriz de sillas preferenciales de la funcion
+        for (int i = 0; i < sillasPreferenciales[posicionFuncion].length; i++) {
 
             // Recorre las 9 sillas de cada fila preferencial
-            for (int j = 0; j < sillasPreferenciales[i].length; j++) {
+            for (int j = 0; j < sillasPreferenciales[posicionFuncion][i].length; j++) {
 
-                // comprueba si la silla preferencial esta disponible
-                if (sillasPreferenciales[i][j] == false) {
+                // comprueba si la silla preferencial esta disponible en la funcion
+                if (sillasPreferenciales[posicionFuncion][i][j] == false) {
 
                     // Aumenta en 1 la cantidad de sillas disponibles
                     cantidadDisponibles++;
                 }
             }
         }
+
         // Devuelve la cantidad total de sillas preferenciales disponibles
         return cantidadDisponibles;
     }
 
-    // Metodo para mostrar la cantidad de sillas disponibles
-    public void mostrarCantidadSillasDisponibles() {
-        
-        // Muestra la cantidad de sillas generales que siguen disponibles
-        System.out.println("Sillas generales disponibles: " + contarSillasGeneralesDisponibles());
+    // Metodo para mostrar la cantidad de sillas disponibles de una funcion
+    public void mostrarCantidadSillasDisponibles(int numeroFuncion) {
 
-        //Compruieba si la sala tiene seccion preferencial
-        if(sillasPreferenciales != null) {
+        // Muestra la cantidad de sillas generales que siguen disponibles en la funcion
+        System.out.println("Sillas generales disponibles: "
+                + contarSillasGeneralesDisponibles(numeroFuncion));
 
-            //Muestra la cantidad de sillas preferenciales disponibles
-            System.out.println("Sillas preferenciales disponibles: " + contarSillasPreferencialesDisponibles());
+        // Compruieba si la sala tiene seccion preferencial
+        if (sillasPreferenciales != null) {
+
+            // Muestra la cantidad de sillas preferenciales disponibles en la funcion
+            System.out.println("Sillas preferenciales disponibles: "
+                    + contarSillasPreferencialesDisponibles(numeroFuncion));
         }
 
     }
 
+    // metodo para asignar una pelicula a una funcion de la sala
+    public boolean asignarPeliculaFuncion(int numeroFuncion, Pelicula pelicula) {
 
+        // Comprueba que la funcion ingresada se encuentre entre 1 y 3
+        if (numero < 1 || numeroFuncion > 3) {
 
-}
+            // Muestra un mensaje si la funcion no existe
+            System.out.println("La funcion ingresadano existe:");
+
+            // Retorna falso por que no se pudo realizar la asignacion
+            return false;
+
+        }
+
+        // Comprueba que la pelicula recibida no sea nada
+        if (pelicula == null) {
+
+            // Mensaje si no se ingreso una pelicula
+            System.out.println("La pelicula ingresada no existe: ");
+
+            return false;
+        }
+
+        // Se resta 1 por que las posiciones de los arreglos comienzan desde 0
+        int posicionFuncion = numeroFuncion - 1;
+
+        // Comprueba si la funcion ya tiene pelicula asignada
+        if (funciones[posicionFuncion].getpelicula() != null) {
+
+            // Muestra un mensaje si la funcion ya esta ocupada
+            System.out.println("Esta funcion ya tiene pelicula asignada: ");
+
+            return false;
+        }
+
+        // Comprueba si la sala es la 1 o la 2
+        if (numero == 1 || numero == 2) {
+
+            // Comprueba si la pelicula es tipo 3D
+            if (pelicula.getTipo().equalsIgnoreCase("3D")) {
+
+                // Las salas 1 y 2 no permiten peliculas 3D
+                System.out.println("Las salas 1 y 2 no permiten peliculas 3D: ");
+
+                return false;
+            }
+        }
+
+        // Comprueba si la sala 3 es la 3
+        if (!pelicula.getTipo().equalsIgnoreCase("3D")) {
+
+            System.out.println("La sala 3 solo permite peliculas 3D: ");
+
+            return false;
+        }
+
+        // Asigna la pelicula a la funcion seleccionada
+        funciones[posicionFuncion].asignarPelicula(pelicula);
+
+        // Muestra un mensaje indicando que la pelicula fue asignada a la funcion
+        System.out.println("La pelicula " + pelicula.getNombre() + "Fue asignada a la funcion" + numeroFuncion
+                + "de la sala" + numero);
+
+                return true;
+
+    }}
+
