@@ -1,9 +1,8 @@
 public class Sala {
 
-public static void main(String[] args) {
-    
-}
-
+    public static void main(String[] args) {
+        
+    }
     // Atributos
     private int numero; // guardar el numero de salas ( puede ser sala 1 2 o 3)
 
@@ -146,13 +145,13 @@ public static void main(String[] args) {
             // Convierte el numero de la fila en una letra
             // cuando i vale 0, la letra sera G
             // cuando i vale 1, la letra sera H
-            //para no usar un int ya que las filas se identifican con letras
+            // para no usar un int ya que las filas se identifican con letras
             // tambien para aprovechar el ciclo
             char letraFila = (char) ('G' + i);
 
             // Letra de cada fila
             System.out.print(letraFila + "");
-        
+
             // Recorre las 9 sillas que tiene cada fila preferencial
             for (int j = 0; j < sillasPreferenciales[i].length; j++) {
 
@@ -167,9 +166,68 @@ public static void main(String[] args) {
                 }
             }
 
-            //Realiza un salto de linea al terminar cada fila
+            // Realiza un salto de linea al terminar cada fila
             System.out.println();
-        
 
+        }
     }
-}}
+
+    // Metodo para comprar una silla general
+    public boolean comprarSillaGeneral(int fila, int numeroSilla) {
+
+        // Se resta 1 por que las posicones de las matrices comienzan desde 0
+        // La fila 1 sera la posicion 0 y la silla 1 sera la posicion 0
+        int posicionFila = fila - 1;
+        int posicionSilla = numeroSilla - 1;
+
+        // comprueba que la fila se encuentre entre 1 y 6
+        if (fila < 1 || fila > 6) {
+
+            // muestra un mensaje si la fila no existe
+            System.out.println("La fila ingresada no existe: ");
+
+            // Retorna falso porque no se pudo realizar la compra
+            return false;
+        }
+
+        // Comprueba que el numero de la silla se encuentre entre 1 y 12
+        if (numeroSilla < 1 || numeroSilla > 12) {
+
+            // Muestra un mensaje si la silla no existe
+            System.out.println("La silla ingresada no existe: ");
+
+            // Retorna falso por que no se pudo realizar la compra
+            return false;
+        }
+
+        // Comprueba si la silla seleccionada ya esta ocupada
+        if (sillasGenerales[posicionFila][posicionSilla]) {
+
+            // Muestra un mensaje si la silla ya fue comprada
+            System.out.println("La silla ya esta ocupada: ");
+
+            return false;
+        }
+
+        // Cambia el estado de la silla de disponible a ocupada (false a true)
+        sillasGenerales[posicionFila][posicionSilla] = true;
+
+        // Convierte la posicion de la fila en una letra para mostrarla
+        char letraFila = (char) ('A' + posicionFila);
+
+        // Muestra un mensaje de que la compra fue realizada
+        System.out.println("La silla " + letraFila + numeroSilla + "Fue comprada con exito: ");
+
+        return true;
+     }
+
+     //Metodo para comprar una silla preferencial
+     //public boolean comprarSillaPreferencial(int fila, int numeroSilla){
+
+        //Comprueba si la sala tiene sillas preferenciales
+       // if(sillasPreferenciales == null){
+            
+       // }
+     //}
+
+}
