@@ -4,7 +4,6 @@ public static void main(String[] args) {
     
 }
 
-
     // Atributos
     private int numero; // guardar el numero de salas ( puede ser sala 1 2 o 3)
 
@@ -134,17 +133,43 @@ public static void main(String[] args) {
         // Comprueba si la sala tiene seccion preferencial
         if (sillasPreferenciales == null) {
 
-            //la sala 3 no tiene sillas preferenciales
+            // la sala 3 no tiene sillas preferenciales
             System.out.println("Esta sala no tiene sillas preferenciales: ");
 
-            //Termina el metodo para no intentar recorrer una matriz inexistente
+            // Termina el metodo para no intentar recorrer una matriz inexistente
             return;
         }
 
-        //Recorre las 2 filas de la seccion preferencial
+        // Recorre las 2 filas de la seccion preferencial
         for (int i = 0; i < sillasPreferenciales.length; i++) {
 
-        }
+            // Convierte el numero de la fila en una letra
+            // cuando i vale 0, la letra sera G
+            // cuando i vale 1, la letra sera H
+            //para no usar un int ya que las filas se identifican con letras
+            // tambien para aprovechar el ciclo
+            char letraFila = (char) ('G' + i);
+
+            // Letra de cada fila
+            System.out.print(letraFila + "");
+        
+            // Recorre las 9 sillas que tiene cada fila preferencial
+            for (int j = 0; j < sillasPreferenciales[i].length; j++) {
+
+                // Comprueba si la silla preferencial esta ocupada
+                if (sillasPreferenciales[i][j]) {
+
+                    // La X marca una silla ocupada
+                    System.out.print("[X]");
+                } else {
+                    // la O marca una silla disponible
+                    System.out.print("[O]");
+                }
+            }
+
+            //Realiza un salto de linea al terminar cada fila
+            System.out.println();
+        
 
     }
-}
+}}
