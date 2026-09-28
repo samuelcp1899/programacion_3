@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-
 public class Principal {
 
     // Metodo que inicia la ejecucion del programa
