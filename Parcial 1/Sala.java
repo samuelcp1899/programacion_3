@@ -1,9 +1,9 @@
 public class Sala {
 
-    public static void main(String[] args) {
-        
-    }
+public static void main(String[] args) {
     
+}
+
     // Atributos
     private int numero; // guardar el numero de salas ( puede ser sala 1 2 o 3)
 
@@ -486,17 +486,23 @@ public class Sala {
         // Comprueba si la sala es la sala 3
         if (numero == 3) {
 
-            //En la sala 3 todas las entradas cuestan 1000
+            // En la sala 3 todas las entradas cuestan 1000
             return 10000;
 
         }
-        //Comprueba si la entrada es preferencial
-        if(preferencial){
+        // Comprueba si la entrada es preferencial
+        if (preferencial) {
 
-            //Retorna el valor de una entrada preferencial
+            // Retorna el valor de una entrada preferencial
             return 12000;
         }
-        //Retorna el valor de una entrada en general
-        return 8000;    
+        // Retorna el valor de una entrada en general
+        return 8000;
+    }
+
+    //Metodo para mostrar el valor a pagar
+    public void mostrarValorCompra(boolean preferencial){
+
+        System.out.println("Valor a pagar: $ " + calcularValorCompra(preferencial));
     }
 }
