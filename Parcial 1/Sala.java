@@ -1,9 +1,8 @@
 public class Sala {
 
-public static void main(String[] args) {
-    
-}
-
+    public static void main(String[] args) {
+        
+    }
     // Atributos
     private int numero; // guardar el numero de salas ( puede ser sala 1 2 o 3)
 
@@ -115,7 +114,7 @@ public static void main(String[] args) {
             char letraFila = (char) ('A' + i);
 
             // Muestra la letra de la fila
-            System.out.println(letraFila + " ");
+            System.out.print(letraFila + " ");
 
             // Recorre las 12 sillas que tiene cada fila
             for (int j = 0; j < sillasGenerales[posicionFuncion][i].length; j++) {
@@ -128,7 +127,7 @@ public static void main(String[] args) {
                 } else {
 
                     // La O representa una silla disponible
-                    System.out.println("[0]");
+                    System.out.print("[O]");
                 }
             }
 
@@ -247,7 +246,7 @@ public static void main(String[] args) {
         char letraFila = (char) ('A' + posicionFila);
 
         // Muestra un mensaje de que la compra fue realizada
-        System.out.println("La silla " + letraFila + numeroSilla + "Fue comprada con exito: ");
+        System.out.println("La silla " + letraFila + numeroSilla + " fue comprada con exito: ");
 
         return true;
     }
@@ -317,7 +316,7 @@ public static void main(String[] args) {
         char letraFila = (char) ('G' + posicionFila);
 
         // Mensaje de que la compra fue realizda correctamente
-        System.out.println("La silla " + letraFila + numeroSilla + "fue comprada con exito: ");
+        System.out.println("La silla " + letraFila + numeroSilla + " fue comprada con exito: ");
 
         return true;
     }
@@ -417,10 +416,10 @@ public static void main(String[] args) {
     public boolean asignarPeliculaFuncion(int numeroFuncion, Pelicula pelicula) {
 
         // Comprueba que la funcion ingresada se encuentre entre 1 y 3
-        if (numero < 1 || numeroFuncion > 3) {
+        if (numeroFuncion < 1 || numeroFuncion > 3) {
 
             // Muestra un mensaje si la funcion no existe
-            System.out.println("La funcion ingresadano existe:");
+            System.out.println("La funcion ingresada no existe:");
 
             // Retorna falso por que no se pudo realizar la asignacion
             return false;
@@ -461,20 +460,24 @@ public static void main(String[] args) {
             }
         }
 
-        // Comprueba si la sala 3 es la 3
-        if (!pelicula.getTipo().equalsIgnoreCase("3D")) {
+        // Comprueba si la sala es la sala 3
+        if (numero == 3) {
 
-            System.out.println("La sala 3 solo permite peliculas 3D: ");
+            if (!pelicula.getTipo().equalsIgnoreCase("3D")) {
 
-            return false;
+                System.out.println("La sala 3 solo permite peliculas 3D: ");
+
+                return false;
+            }
         }
 
         // Asigna la pelicula a la funcion seleccionada
         funciones[posicionFuncion].asignarPelicula(pelicula);
 
         // Muestra un mensaje indicando que la pelicula fue asignada a la funcion
-        System.out.println("La pelicula " + pelicula.getNombre() + "Fue asignada a la funcion" + numeroFuncion
-                + "de la sala" + numero);
+        System.out.println("La pelicula " + pelicula.getNombre()
+                + " fue asignada a la funcion " + numeroFuncion
+                + " de la sala " + numero);
 
         return true;
 
@@ -486,22 +489,24 @@ public static void main(String[] args) {
         // Comprueba si la sala es la sala 3
         if (numero == 3) {
 
-            // En la sala 3 todas las entradas cuestan 1000
+            // En la sala 3 todas las entradas cuestan 10000
             return 10000;
 
         }
+
         // Comprueba si la entrada es preferencial
         if (preferencial) {
 
             // Retorna el valor de una entrada preferencial
             return 12000;
         }
+
         // Retorna el valor de una entrada en general
         return 8000;
     }
 
-    //Metodo para mostrar el valor a pagar
-    public void mostrarValorCompra(boolean preferencial){
+    // Metodo para mostrar el valor a pagar
+    public void mostrarValorCompra(boolean preferencial) {
 
         System.out.println("Valor a pagar: $ " + calcularValorCompra(preferencial));
     }
