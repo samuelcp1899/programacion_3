@@ -240,7 +240,7 @@ public class Principal {
                         int fila = teclado.nextInt();
 
                         // Solicita la silla
-                        System.out.println("Ingrese la silla: ");
+                        System.out.print("Ingrese la silla: ");
                         int silla = teclado.nextInt();
 
                         // Entrada general
