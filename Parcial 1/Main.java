@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Principal {
+public class Main {
 
     // Metodo que inicia la ejecucion del programa
     public static void main(String[] args) {
@@ -211,8 +211,8 @@ public class Principal {
                         break;
                     }
 
-                    //Comprueba que no se seleccione preferencial en la sala 3
-                    if(salaVenta == 3 && tipoEntrada == 2){
+                    // Comprueba que no se seleccione preferencial en la sala 3
+                    if (salaVenta == 3 && tipoEntrada == 2) {
                         System.out.println("La sala 3 no tiene sillas preferenciales");
                         break;
                     }
@@ -270,6 +270,17 @@ public class Principal {
                                         + salaSeleccionada2.calcularValorCompra(true);
                             }
                         }
+                    }
+
+                    // Muestra las sillas generales despues de realizar la compra
+                    System.out.println("====== SILLAS GENERALES DESPUES DE LA COMPRA ======");
+                    salaSeleccionada2.mostrarSillasGenerales(funcionVenta);
+
+                    // Muestra las sillas preferenciales despues de realizar la compra
+                    // Solamente se muestran en las salas 1 y 2
+                    if (salaVenta == 1 || salaVenta == 2) {
+                        System.out.println("====== SILLAS PREFERENCIALES DESPUES DE LA COMPRA ======");
+                        salaSeleccionada2.mostrarSillasPreferenciales(funcionVenta);
                     }
 
                     // Muestra el valor total de todas las sillas compradas
