@@ -28,7 +28,7 @@ public class Problema92 {
       // Para recorrer la cadena desde posicion 0 hasta la ultima
       for (int i = 0; i < cadena.length(); i++);{
          
-      char c = cadena.charAt(i);
+      //char c = cadena.charAt(i);
 
       }
 
