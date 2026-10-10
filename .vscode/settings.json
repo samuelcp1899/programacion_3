@@ -1,3 +1,4 @@
 {
-    "java.debug.settings.onBuildFailureProceed": true
+    "java.debug.settings.onBuildFailureProceed": true,
+    "editor.fontFamily": "\"editor.fontFamily\": \"'Monaspace Neon', monospace\""
 }
