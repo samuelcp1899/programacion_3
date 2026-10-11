@@ -25,12 +25,69 @@ public class Problema92 {
       // asumimos que es valida si algo falla pasamos a false
       boolean EsValida = true;
 
-      // Para recorrer la cadena desde posicion 0 hasta la ultima
-      for (int i = 0; i < cadena.length(); i++);{
-         
-      //char c = cadena.charAt(i);
+      // toma cada caracter de la cadena uno por uno y lo guarda en c
 
+      for (char c : cadena.toCharArray()) {
+
+         // si estamos Leyendo X
+
+         if (leyendoX) {
+
+            if (c == '&') {
+
+               leyendoX = false; // X termino ahora viene Y
+
+               HaySeparador = true; // anota si hubo separador
+
+            } else { // si NO es el separador
+
+               pila.push(c); // guardamos el caracter en la pila
+            }
+
+         } else { // si estamos leyendo Y
+
+            if (pila.empty()) {
+
+               EsValida = false; // Y es mas larga que X, NO cumple
+
+               break; // salimos de for, ya no hace falta seguir
+            }
+
+            // sacamos el ultimo caracter que entro en la pila
+
+            char tope = pila.pop();
+
+            // si es distinto al caracter actual Y
+
+            if (tope != c) {
+
+               EsValida = false; // Y no es la inversa X, NO cumple
+
+               break;
+            }
+
+         }
       }
+
+      //debe haber aparecido el & y la pila debe estar vacia
+
+      //si sobran caracteres en la pila, X era mas larga que Y
+
+      if(!HaySeparador || !pila.empty()) {
+         
+         EsValida = false; //NO cumple
+      }
+
+      //Mostramos el  resultado
+
+      if(EsValida) {
+         System.out.println("SI tiene  la forma X&Y");
+      
+      } else{
+         System.out.println("NO tiene la forma X&Y");
+      }
+
+      teclado.close();
 
    }
 
