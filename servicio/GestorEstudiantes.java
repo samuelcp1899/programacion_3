@@ -88,8 +88,4 @@ public class GestorEstudiantes {
     public int cantidadEstudiantes() {
         return estudiantes.size();
     }
-
-    public static void main(String[] args) {
-        
-    }
 }
