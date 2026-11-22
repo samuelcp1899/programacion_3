@@ -17,9 +17,6 @@ public class GestorMaterias {
         this.materias = new TreeMap<String, Materia>();
     }
 
-    public static void main(String[] args) {
-        
-    }
     // Registra una materia en el sistema.
     public boolean registrarMateria(Materia materia) {
 
