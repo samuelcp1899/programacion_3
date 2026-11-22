@@ -1,4 +1,4 @@
-package servicio;
+package gestion;
 
 import java.util.HashMap;
 import modelo.Estudiante;
