@@ -252,7 +252,4 @@ public class Estudiante extends Persona {
                 + " | Materias cursadas: "
                 + historialMaterias.size();
     }
-    public static void main(String[] args) {
-        
-    }
 }

@@ -3,14 +3,10 @@ package gestion;
 import java.util.Stack;
 import modelo.Estudiante;
 
-// Esta clase administra el historial de reportes academicos
-// utilizando una pila.
+// Esta clase administra los reportes academicos mediante una pila.
 public class GestorReportes {
 
-    // Pila que almacena los reportes academicos.
-    //
-    // Funciona con el principio LIFO:
-    // el ultimo reporte guardado es el primero que se recupera.
+    // Pila donde se guardan los reportes.
     private Stack<String> pilaReportes;
 
     // Constructor.
@@ -20,18 +16,18 @@ public class GestorReportes {
         this.pilaReportes = new Stack<String>();
     }
 
-    // Genera y guarda un reporte de un estudiante.
+    // Genera y guarda el reporte de un estudiante.
     public boolean generarReporteEstudiante(
             Estudiante estudiante,
             int numeroSemestre) {
 
-        // Comprueba que el estudiante recibido exista.
+        // Comprueba que el estudiante exista.
         if (estudiante == null) {
             System.out.println("El estudiante no existe");
             return false;
         }
 
-        // Comprueba que el semestre se encuentre entre 1 y 10.
+        // Comprueba que el semestre sea valido.
         if (numeroSemestre < 1 || numeroSemestre > 10) {
             System.out.println(
                     "El semestre debe estar entre 1 y 10"
@@ -39,20 +35,23 @@ public class GestorReportes {
             return false;
         }
 
-        // Construye el reporte utilizando los datos del estudiante.
+        // Construye el reporte como un texto.
         String reporte =
                 "===== REPORTE ACADEMICO =====\n"
                 + "Nombre: " + estudiante.getNombre() + "\n"
                 + "ID: " + estudiante.getId() + "\n"
                 + "Email: " + estudiante.getEmail() + "\n"
-                + "Semestre consultado: " + numeroSemestre + "\n"
+                + "Semestre consultado: "
+                + numeroSemestre + "\n"
                 + "Promedio: "
-                + estudiante.calcularPromedioSemestre(numeroSemestre)
+                + estudiante.calcularPromedioSemestre(
+                        numeroSemestre
+                )
                 + "\n"
                 + "Materias en historial: "
                 + estudiante.getHistorialMaterias().size();
 
-        // push agrega el reporte en la parte superior de la pila.
+        // Guarda el reporte en la parte superior de la pila.
         pilaReportes.push(reporte);
 
         System.out.println("Reporte generado correctamente");
@@ -69,11 +68,11 @@ public class GestorReportes {
             return "No existen reportes guardados";
         }
 
-        // peek consulta el elemento superior sin eliminarlo.
+        // Retorna el ultimo reporte sin eliminarlo.
         return pilaReportes.peek();
     }
 
-    // Retira y devuelve el ultimo reporte generado.
+    // Retira el ultimo reporte.
     public String retirarUltimoReporte() {
 
         // Comprueba si la pila esta vacia.
@@ -81,17 +80,18 @@ public class GestorReportes {
             return "No existen reportes guardados";
         }
 
-        // pop elimina y retorna el elemento superior.
+        // Retorna y elimina el ultimo reporte.
         return pilaReportes.pop();
     }
 
-    // Muestra todos los reportes desde el mas reciente
-    // hasta el mas antiguo.
+    // Muestra todos los reportes guardados.
     public void mostrarReportes() {
 
         // Comprueba si la pila esta vacia.
         if (pilaReportes.isEmpty()) {
-            System.out.println("No existen reportes guardados");
+            System.out.println(
+                    "No existen reportes guardados"
+            );
             return;
         }
 
@@ -99,8 +99,10 @@ public class GestorReportes {
                 "===== HISTORIAL DE REPORTES ====="
         );
 
-        // Recorre la pila desde la ultima posicion hasta la primera.
-        for (int i = pilaReportes.size() - 1; i >= 0; i--) {
+        // Recorre la pila desde el reporte mas reciente.
+        for (int i = pilaReportes.size() - 1;
+                i >= 0;
+                i--) {
 
             System.out.println(pilaReportes.get(i));
             System.out.println("-------------------------------");
@@ -115,7 +117,6 @@ public class GestorReportes {
     // Elimina todos los reportes.
     public void limpiarReportes() {
 
-        // clear elimina todos los elementos de la pila.
         pilaReportes.clear();
 
         System.out.println(
