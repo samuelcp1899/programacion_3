@@ -1,6 +1,7 @@
 package gestion;
 
 import java.util.HashMap;
+import excepciones.EstudianteNoEncontrado;
 import modelo.Estudiante;
 
 // Esta clase se encarga de administrar los estudiantes del sistema.
@@ -10,11 +11,11 @@ public class GestorEstudiantes {
     // La llave es el ID y el valor es el objeto Estudiante.
     private HashMap<String, Estudiante> estudiantes;
 
-    // Constructor.
+    // Constructor de la clase.
     public GestorEstudiantes() {
 
         // Crea el HashMap inicialmente vacio.
-        estudiantes = new HashMap<String, Estudiante>();
+        this.estudiantes = new HashMap<String, Estudiante>();
     }
 
     // Metodo para registrar un estudiante.
@@ -32,41 +33,60 @@ public class GestorEstudiantes {
             return false;
         }
 
-        // Guarda el estudiante usando su ID como llave.
+        // Guarda el estudiante utilizando su ID como llave.
         estudiantes.put(estudiante.getId(), estudiante);
 
         System.out.println("Estudiante registrado correctamente");
+
         return true;
     }
 
-    // Metodo para buscar un estudiante por su ID.
-    public Estudiante buscarEstudiante(String id) {
+    // Metodo para buscar un estudiante mediante su ID.
+    // Si el estudiante no existe, lanza una excepcion personalizada.
+    public Estudiante buscarEstudiante(String id)
+            throws EstudianteNoEncontrado {
 
-        // Busca el ID y retorna el estudiante asociado.
-        // Si el ID no existe, HashMap retorna null.
-        return estudiantes.get(id);
+        // Busca el estudiante dentro del HashMap.
+        Estudiante estudiante = estudiantes.get(id);
+
+        // Si get retorna null, el estudiante no esta registrado.
+        if (estudiante == null) {
+
+            // Lanza la excepcion personalizada.
+            throw new EstudianteNoEncontrado(
+                    "No existe un estudiante con el ID: " + id
+            );
+        }
+
+        // Devuelve el estudiante encontrado.
+        return estudiante;
     }
 
-    // Metodo para eliminar un estudiante por su ID.
-    public boolean eliminarEstudiante(String id) {
+    // Metodo para eliminar un estudiante mediante su ID.
+    public boolean eliminarEstudiante(String id)
+            throws EstudianteNoEncontrado {
 
-        // Comprueba si el estudiante existe.
+        // Comprueba si el ID no se encuentra registrado.
         if (!estudiantes.containsKey(id)) {
-            System.out.println("No existe un estudiante con ese ID");
-            return false;
+
+            // Lanza la excepcion personalizada.
+            throw new EstudianteNoEncontrado(
+                    "No existe un estudiante con el ID: " + id
+            );
         }
 
         // Elimina el estudiante asociado con el ID.
         estudiantes.remove(id);
 
         System.out.println("Estudiante eliminado correctamente");
+
         return true;
     }
 
     // Metodo para mostrar todos los estudiantes registrados.
     public void mostrarEstudiantes() {
 
-        // Comprueba si no existen estudiantes registrados.
+        // Comprueba si el HashMap no tiene estudiantes.
         if (estudiantes.isEmpty()) {
             System.out.println("No hay estudiantes registrados");
             return;
@@ -77,7 +97,8 @@ public class GestorEstudiantes {
         // Recorre todos los estudiantes almacenados en el HashMap.
         for (Estudiante estudiante : estudiantes.values()) {
 
-            // mostrarInformacion retorna un String.
+            // mostrarInformacion devuelve un String,
+            // por eso se imprime utilizando System.out.println.
             System.out.println(estudiante.mostrarInformacion());
 
             System.out.println("-----------------------------------");
@@ -86,6 +107,20 @@ public class GestorEstudiantes {
 
     // Metodo para consultar la cantidad de estudiantes registrados.
     public int cantidadEstudiantes() {
+
+        // size retorna la cantidad de elementos del HashMap.
         return estudiantes.size();
+    }
+
+    // Comprueba si existe un estudiante con un ID determinado.
+    public boolean existeEstudiante(String id) {
+
+        // containsKey comprueba si el ID existe como llave.
+        return estudiantes.containsKey(id);
+    }
+
+    // Permite consultar el HashMap completo.
+    public HashMap<String, Estudiante> getEstudiantes() {
+        return estudiantes;
     }
 }
