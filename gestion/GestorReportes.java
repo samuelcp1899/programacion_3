@@ -3,31 +3,34 @@ package gestion;
 import java.util.Stack;
 import modelo.Estudiante;
 
-// Esta clase administra los reportes academicos mediante una pila.
+// Esta clase administra los reportes academicos
+// utilizando una pila.
 public class GestorReportes {
 
-    // Pila donde se guardan los reportes.
+    // Pila que almacena los reportes academicos.
+    // Funciona con el principio LIFO:
+    // el ultimo reporte guardado es el primero en salir.
     private Stack<String> pilaReportes;
 
-    // Constructor.
+    // Constructor de la clase.
     public GestorReportes() {
 
         // Crea la pila inicialmente vacia.
         this.pilaReportes = new Stack<String>();
     }
 
-    // Genera y guarda el reporte de un estudiante.
+    // Genera un reporte academico de un estudiante.
     public boolean generarReporteEstudiante(
             Estudiante estudiante,
             int numeroSemestre) {
 
-        // Comprueba que el estudiante exista.
+        // Comprueba que el estudiante recibido exista.
         if (estudiante == null) {
             System.out.println("El estudiante no existe");
             return false;
         }
 
-        // Comprueba que el semestre sea valido.
+        // Comprueba que el semestre se encuentre entre 1 y 10.
         if (numeroSemestre < 1 || numeroSemestre > 10) {
             System.out.println(
                     "El semestre debe estar entre 1 y 10"
@@ -51,7 +54,7 @@ public class GestorReportes {
                 + "Materias en historial: "
                 + estudiante.getHistorialMaterias().size();
 
-        // Guarda el reporte en la parte superior de la pila.
+        // push guarda el reporte en la parte superior de la pila.
         pilaReportes.push(reporte);
 
         System.out.println("Reporte generado correctamente");
@@ -68,11 +71,11 @@ public class GestorReportes {
             return "No existen reportes guardados";
         }
 
-        // Retorna el ultimo reporte sin eliminarlo.
+        // peek consulta el ultimo elemento sin eliminarlo.
         return pilaReportes.peek();
     }
 
-    // Retira el ultimo reporte.
+    // Retira y devuelve el ultimo reporte generado.
     public String retirarUltimoReporte() {
 
         // Comprueba si la pila esta vacia.
@@ -80,11 +83,12 @@ public class GestorReportes {
             return "No existen reportes guardados";
         }
 
-        // Retorna y elimina el ultimo reporte.
+        // pop devuelve y elimina el ultimo elemento.
         return pilaReportes.pop();
     }
 
-    // Muestra todos los reportes guardados.
+    // Muestra todos los reportes guardados,
+    // desde el mas reciente hasta el mas antiguo.
     public void mostrarReportes() {
 
         // Comprueba si la pila esta vacia.
@@ -99,7 +103,8 @@ public class GestorReportes {
                 "===== HISTORIAL DE REPORTES ====="
         );
 
-        // Recorre la pila desde el reporte mas reciente.
+        // Recorre la pila desde la ultima posicion
+        // hasta la primera.
         for (int i = pilaReportes.size() - 1;
                 i >= 0;
                 i--) {
@@ -114,9 +119,10 @@ public class GestorReportes {
         return pilaReportes.size();
     }
 
-    // Elimina todos los reportes.
+    // Elimina todos los reportes guardados.
     public void limpiarReportes() {
 
+        // clear elimina todos los elementos de la pila.
         pilaReportes.clear();
 
         System.out.println(
