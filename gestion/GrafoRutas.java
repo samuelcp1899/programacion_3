@@ -490,8 +490,4 @@ public class GrafoRutas {
     public int getCantidadMaterias() {
         return cantidadMaterias;
     }
-
-    public static void main(String[] args) {
-        
-    }
 }
